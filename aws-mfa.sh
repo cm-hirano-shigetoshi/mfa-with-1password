@@ -5,16 +5,16 @@ readonly ACCOUNT="${ONEPASSWORD_ACCOUNT-YourAccount}"
 readonly AUTH_FILE="$1"
 readonly SERVICE_NAME="$2"
 
-pass=$(eval OP_SESSION_$ACCOUNT=$(cat $AUTH_FILE) op get totp $SERVICE_NAME)
+pass=$(eval OP_SESSION_${ACCOUNT}=$(cat ${AUTH_FILE}) op get totp ${SERVICE_NAME})
 if [[ -z "${pass}" ]]; then
-  tmux split-window "op signin $ACCOUNT --output=raw > $AUTH_FILE"
+  tmux split-window "op signin ${ACCOUNT} --output=raw > ${AUTH_FILE}"
   while pgrep -f 'op signin ' >/dev/null; do
     sleep 1
   done
-  if [[ ! -s $AUTH_FILE ]]; then
+  if [[ ! -s ${AUTH_FILE} ]]; then
     exit
   fi
-  pass=$(eval OP_SESSION_$ACCOUNT=$(cat $AUTH_FILE) op get totp $SERVICE_NAME)
+  pass=$(eval OP_SESSION_${ACCOUNT}=$(cat ${AUTH_FILE}) op get totp ${SERVICE_NAME})
 fi
 
 if [[ $# -ge 3 ]]; then
