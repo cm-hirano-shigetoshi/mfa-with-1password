@@ -16,6 +16,6 @@ if [[ -n "${pass}" ]]; then
     echo "${pass}"
   fi
 else
-  tmux split-window "bash ${TOOLDIR}/with-password.sh '${AUTH_FILE}' '${SERVICE_NAME}' '${PANE_ID}'"
+  tmux split-window "bash ${TOOLDIR}/with-password.sh '${ACCOUNT}' '${AUTH_FILE}' '${SERVICE_NAME}' '${PANE_ID}'"
 fi
 

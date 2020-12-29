@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -eu
 
-readonly ACCOUNT="${ONEPASSWORD_ACCOUNT-YourAccount}"
-readonly AUTH_FILE="$1"
-readonly SERVICE_NAME="$2"
-readonly PANE_ID="$3"
+readonly ACCOUNT="$1"
+readonly AUTH_FILE="$2"
+readonly SERVICE_NAME="$3"
+readonly PANE_ID="$4"
 
 op signin ${ACCOUNT} --output=raw > ${AUTH_FILE}
 pass=$(eval OP_SESSION_${ACCOUNT}=$(cat ${AUTH_FILE}) op get totp ${SERVICE_NAME})
